@@ -1,4 +1,4 @@
-FROM debian
+FROM debian:11
 
 USER root
 
@@ -15,4 +15,12 @@ RUN curl -sSL https://get.rvm.io | bash -s stable
 # Enable RVM commands
 RUN . /usr/local/rvm/scripts/rvm
 
-ENTRYPOINT ["/bin/bash", "-l", "-c","bash"]
+RUN rvm get head
+
+CMD ["/bin/bash", "--login"]
+
+
+# To run correctly this container -> docker run -it <id>
+
+# Example to install ruby 2.7.6
+# rvm install 2.7.6 --default
